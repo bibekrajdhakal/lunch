@@ -69,7 +69,8 @@ public class LunchServiceImpl implements LunchService {
      * @return true if first date is before the second date
      */
     boolean isFirstDateBeforeSecondDate(LocalDate firstDate, Date secondDate) {
-        return firstDate.isBefore(secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        LocalDate localDate = secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return firstDate.isBefore(localDate) || firstDate.isEqual(localDate);
     }
 
 }

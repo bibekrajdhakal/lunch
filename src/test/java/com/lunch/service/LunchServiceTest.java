@@ -131,6 +131,13 @@ public class LunchServiceTest {
         assertFalse("Second date is 7 days before so should be false", firstDateBeforeSecondDate);
     }
 
+    @Test
+    public void testIsFirstDateBeforeSecondDateWhenBothDatesAreSameShouldReturnTrue() {
+        boolean firstDateBeforeSecondDate = service.isFirstDateBeforeSecondDate(LocalDate.now(),
+                Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        assertTrue("Second date is the same day as first date so should be true", firstDateBeforeSecondDate);
+    }
+
     private Ingredients createIngredient(String title, int bestBeforeDays, int useByDays) {
         Ingredients ingredients = new Ingredients();
         ingredients.setTitle(title);
