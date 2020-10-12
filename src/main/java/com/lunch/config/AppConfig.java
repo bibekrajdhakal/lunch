@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Configuration class to read data from properties file
+ */
 @Slf4j
 public class AppConfig {
 

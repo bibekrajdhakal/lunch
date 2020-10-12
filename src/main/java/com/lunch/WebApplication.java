@@ -21,6 +21,12 @@ import javax.ws.rs.client.ClientBuilder;
 import java.io.InputStream;
 import java.util.Objects;
 
+/**
+ * Configuring the application
+ * Initializing logback for logging purposes
+ * binding the endpoints and service classes
+ * binding the configuration classes
+ */
 @Slf4j
 public class WebApplication extends AbstractModule {
 
@@ -56,6 +62,9 @@ public class WebApplication extends AbstractModule {
         }
     }
 
+    /**
+     * provide a single instance of EntityManager for persistence
+     */
     @Provides
     @Singleton
     public EntityManager getEntityManager() {
@@ -63,6 +72,9 @@ public class WebApplication extends AbstractModule {
         return factory.createEntityManager();
     }
 
+    /**
+     * provide a single instance of client for making api calls
+     */
     @Provides
     @Singleton
     public DataClient getClient() {

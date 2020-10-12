@@ -41,19 +41,34 @@ public class LunchServiceImpl implements LunchService {
         return list;
     }
 
-    private boolean isWithInUseByDate(Recipes recipes) {
+    /**
+     * checks if all the ingredients used in a recipe are with in the use by date
+     * @param recipes the recipes whose ingredients date should be inspected
+     * @return true if all ingredients are within the use by date
+     */
+    boolean isWithInUseByDate(Recipes recipes) {
         return recipes.getIngredients()
                 .stream()
                 .allMatch(ingredients -> isFirstDateBeforeSecondDate(LocalDate.now(), ingredients.getUseBy()));
     }
 
-    private boolean isWithInBestBeforeDate(Recipes recipes) {
+    /**
+     * checks if all the ingredients used in a recipe are with in the best before date
+     * @param recipes the recipes whose ingredients date should be inspected
+     * @return true if all ingredients are within the best before date
+     */
+    boolean isWithInBestBeforeDate(Recipes recipes) {
         return recipes.getIngredients()
                 .stream()
                 .allMatch(ingredients -> isFirstDateBeforeSecondDate(LocalDate.now(), ingredients.getBestBefore()));
     }
 
-    private boolean isFirstDateBeforeSecondDate(LocalDate firstDate, Date secondDate) {
+    /**
+     * @param firstDate LocalDate to compare
+     * @param secondDate Date to be compared
+     * @return true if first date is before the second date
+     */
+    boolean isFirstDateBeforeSecondDate(LocalDate firstDate, Date secondDate) {
         return firstDate.isBefore(secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
 

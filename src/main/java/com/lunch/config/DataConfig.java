@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+/**
+ * Configure the data from a given url and convert it to entities
+ */
 @Slf4j
 public class DataConfig {
 
@@ -34,6 +37,10 @@ public class DataConfig {
         persistData(ingredientsMap, recipesMap);
     }
 
+    /**
+     * parse the ingredients json data received from the api and convert to entity object
+     * @return map with title of the ingredient as the key, and the ingredients object as value
+     */
     private Map<String, Ingredients> getIngredients() {
         Map<String, Ingredients> ingredientsMap = new HashMap<>();
         ProviderResponse response = provider.getIngredients();
@@ -54,6 +61,10 @@ public class DataConfig {
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    /**
+     * parse the recipes json data received from the api and convert to entity object
+     * @return map with title of the recipes as the key, and the set of ingredients as value
+     */
     private Map<String, Set<String>> getRecipes() {
         ProviderResponse response = provider.getRecipes();
         JSONObject jsonObject = new JSONObject(response.getMessage());
@@ -72,6 +83,11 @@ public class DataConfig {
         return recipeIngredients;
     }
 
+    /**
+     * map recipes to ingredients so it can be loaded to database
+     * @param ingredientsMap map with title of the ingredient as the key, and the ingredients object as value
+     * @param recipesMap map with title of the recipes as the key, and the set of ingredients as value
+     */
     private void persistData(Map<String, Ingredients> ingredientsMap, Map<String, Set<String>> recipesMap) {
         for (Map.Entry<String, Set<String>> entry : recipesMap.entrySet()) {
             Recipes recipes = new Recipes();

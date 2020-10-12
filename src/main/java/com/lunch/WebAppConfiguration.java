@@ -8,6 +8,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 
+/**
+ * The entry point of the application
+ * Configures the resteasy guice module and provides the class to look into for initialization
+ */
 public class WebAppConfiguration {
 
     private WebAppConfiguration() {}

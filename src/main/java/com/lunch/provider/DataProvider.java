@@ -9,6 +9,9 @@ import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
+/**
+ * Provider class to provide the json data from api
+ */
 @Slf4j
 public class DataProvider {
 
@@ -29,6 +32,10 @@ public class DataProvider {
         return generateProviderResponse(appConfig.getRecipesUrl());
     }
 
+    /**
+     * @param endpoint the url to make the api call to
+     * @return response message
+     */
     private ProviderResponse generateProviderResponse(String endpoint) {
         try {
             Response response = client.getData(endpoint);
@@ -39,6 +46,12 @@ public class DataProvider {
         }
     }
 
+    /**
+     *
+     * @param response the response of the api call
+     * @return message in the response if successful
+     * @throws WebApplicationException if any other response
+     */
     private ProviderResponse generateProviderResponse(Response response) {
         Response.Status status = Response.Status.fromStatusCode(response.getStatus());
         String body = response.readEntity(String.class);
