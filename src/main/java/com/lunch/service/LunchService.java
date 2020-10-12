@@ -1,11 +1,9 @@
 package com.lunch.service;
 
-import com.lunch.model.Recipes;
-
-import java.util.List;
+import com.lunch.dto.RecipesList;
 
 public interface LunchService {
 
-    List<Recipes> get();
+    RecipesList get();
 
 }
